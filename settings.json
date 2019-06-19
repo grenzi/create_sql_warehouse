@@ -1,0 +1,13 @@
+{
+    "dimension_id_column_name": "dimId",
+    "dimension_schema": "dim",
+    "dropfirst": false,
+    "outputdir": "<<path_to_save_files>>\\",
+    "source_db": "<<sourcedb>>",
+    "source_schema": "dbo",
+    "source_server": "localhost",
+    "staging_schema": "staging",
+    "target_db": "<<targetdb",
+    "target_server": "localhost",
+    "temporal_schema": "hist"
+}

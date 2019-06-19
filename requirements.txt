@@ -1,0 +1,6 @@
+#pip install -i https://pypi.anaconda.org/ales-erjavec/simple pyreadline
+sqlalchemy
+PySimpleGUI
+pyodbc
+Jinja2
+requests
