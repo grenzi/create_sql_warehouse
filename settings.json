@@ -7,7 +7,7 @@
     "source_schema": "dbo",
     "source_server": "localhost",
     "staging_schema": "staging",
-    "target_db": "<<targetdb",
+    "target_db": "<<targetdb>>",
     "target_server": "localhost",
     "temporal_schema": "hist"
 }
