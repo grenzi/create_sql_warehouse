@@ -339,6 +339,7 @@ def get_dimension_scd2_ddl(table, settings, columns):
         selected_columns=columns,
         temporal_schema=settings["temporal_schema"],
         temporal_table=table,
+        dimension_id_column_name=settings['dimension_id_column_name']
     )
     return scd2_sql, sc2_proc_sql
 

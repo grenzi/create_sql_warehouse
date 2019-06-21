@@ -194,7 +194,6 @@ CREATE PROCEDURE [{{dimension_schema}}].[{{procedurename}}] AS
 BEGIN
     SET NOCOUNT ON;
     truncate table [{{dimension_schema}}].[{{dimension_table}}];  
-    DBCC CHECKIDENT ('[{{dimension_schema}}].[{{dimension_table}}]', RESEED, 1);
 
     WITH rawdim as ( SELECT {% for col in selected_columns %}[{{col}}]{{ "," if not loop.last }}{% endfor %},MIN([ValidFrom]) as ValidFrom ,MAX([ValidTo]) as ValidTo
     FROM [{{temporal_schema}}].[{{temporal_table}}] FOR SYSTEM_TIME ALL
@@ -202,8 +201,8 @@ BEGIN
     ), thedim as (SELECT row_number() over (order by ValidTo) as dimId,
     {% for col in selected_columns %}[{{col}}]{{ "," if not loop.last }}{% endfor %},[ValidFrom],[ValidTo] FROM rawdim)
     INSERT INTO [{{dimension_schema}}].[{{dimension_table}}] (
-    {% for col in selected_columns %}[{{col}}]{{ "," if not loop.last }}{% endfor %},[ValidFrom],[ValidTo])
-    select {% for col in selected_columns %}[{{col}}]{{ "," if not loop.last }}{% endfor %},[ValidFrom],[ValidTo] FROM thedim;
+    [{{dimension_id_column_name}}],{% for col in selected_columns %}[{{col}}]{{ "," if not loop.last }}{% endfor %},[ValidFrom],[ValidTo])
+    select [{{dimension_id_column_name}}],{% for col in selected_columns %}[{{col}}]{{ "," if not loop.last }}{% endfor %},[ValidFrom],[ValidTo] FROM thedim;
     
     SET NOCOUNT OFF;
 END
