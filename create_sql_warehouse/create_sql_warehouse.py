@@ -99,65 +99,63 @@ def main(config):
     )
 
     # select tables from source
-    tablesinscope = dbutil.get_source_tables()
-    logger.info("...Processing Tables")
-    for table in tablesinscope:
-        logger.info(f"......Starting on {table}")
-        # todo for wh for each table:
-        # * given input table ->
-        # * create staging table
-        stagingtablesql, stagingloadprocsql = dbutil.get_staging_ddl(table)
-        saveOutputFile(
-            settings.get("outputdir"),
-            settings.get("staging_schema"),
-            "Tables",
-            table,
-            stagingtablesql,
-        )
-        # * create load to staging
-        saveOutputFile(
-            settings.get("outputdir"),
-            settings.get("staging_schema"),
-            "Stored Procedures",
-            f"Populate{table}",
-            stagingloadprocsql,
-        )
+    table = dbutil.get_source_table()
+    logger.info(f"...Processing {table}")
+    # todo for wh for table:
+    # * given input table ->
+    # * create staging table
+    stagingtablesql, stagingloadprocsql = dbutil.get_staging_ddl(table)
+    saveOutputFile(
+        settings.get("outputdir"),
+        settings.get("staging_schema"),
+        "Tables",
+        table,
+        stagingtablesql,
+    )
+    # * create load to staging
+    saveOutputFile(
+        settings.get("outputdir"),
+        settings.get("staging_schema"),
+        "Stored Procedures",
+        f"Populate{table}",
+        stagingloadprocsql,
+    )
 
-        # * create temporal table
-        temporaltablesql, temporalloadprocsql = dbutil.get_temporal_ddl(table)
-        saveOutputFile(
-            settings.get("outputdir"),
-            settings.get("temporal_schema"),
-            "Tables",
-            table,
-            temporaltablesql,
-        )
-        # * create load to temporal table
-        saveOutputFile(
-            settings.get("outputdir"),
-            settings.get("temporal_schema"),
-            "Stored Procedures",
-            f'Populate{table.replace(" ", "")}',
-            temporalloadprocsql,
-        )
+    # * create temporal table
+    temporaltablesql, temporalloadprocsql = dbutil.get_temporal_ddl(table)
+    saveOutputFile(
+        settings.get("outputdir"),
+        settings.get("temporal_schema"),
+        "Tables",
+        table,
+        temporaltablesql,
+    )
+    # * create load to temporal table
+    saveOutputFile(
+        settings.get("outputdir"),
+        settings.get("temporal_schema"),
+        "Stored Procedures",
+        f'Populate{table.replace(" ", "")}',
+        temporalloadprocsql,
+    )
 
-        # * create scd1or2 dim table
-        dimensionsql, dimensionloadsql = dbutil.get_dimension_ddl(table)
-        saveOutputFile(
-            settings.get("outputdir"),
-            settings.get("dimension_schema"),
-            "Tables",
-            table,
-            dimensionsql,
-        )
-        # * create load to dim
-        saveOutputFile(
-            settings.get("outputdir"),
-            settings.get("dimension_schema"),
-            "Stored Procedures",
-            f'Populate{table.replace(" ", "")}',
-            dimensionloadsql,
-        )
+    # * create scd1or2 dim table
+    dimensionsql, dimensionloadsql = dbutil.get_dimension_ddl(table)
+    saveOutputFile(
+        settings.get("outputdir"),
+        settings.get("dimension_schema"),
+        "Tables",
+        table,
+        dimensionsql,
+    )
+    # * create load to dim
+    saveOutputFile(
+        settings.get("outputdir"),
+        settings.get("dimension_schema"),
+        "Stored Procedures",
+        f'Populate{table.replace(" ", "")}',
+        dimensionloadsql,
+    )
 
     # format output nicely
     logger.info("...formatting output")

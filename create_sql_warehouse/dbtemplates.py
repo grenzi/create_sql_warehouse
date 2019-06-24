@@ -152,7 +152,7 @@ BEGIN
         ALTER TABLE [{{temporal_schema}}].[{{source_table}}] DROP PERIOD FOR SYSTEM_TIME;
         UPDATE [{{temporal_schema}}].[{{source_table}}] SET ValidFrom={{backdate_hist_to}};
         ALTER TABLE [{{temporal_schema}}].[{{source_table}}] ADD PERIOD FOR SYSTEM_TIME (ValidFrom,ValidTo);
-        ALTER TABLE [{{temporal_schema}}].[{{source_table}}] set (system_versioning = on (HISTORY_TABLE=[{{temporal_schema}}].[{{source_table}}History]);        
+        ALTER TABLE [{{temporal_schema}}].[{{source_table}}] set (system_versioning = on (HISTORY_TABLE=[{{temporal_schema}}].[{{source_table}}History]));        
     END
     {% endif %}
 END

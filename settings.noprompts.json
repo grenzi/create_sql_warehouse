@@ -11,7 +11,7 @@
     "target_server": "localhost",
     "temporal_schema": "hist",
     "backdate_hist_to": "2019-01-01",
-    "source_tables": [ "table1","table2" ],
+    "source_table": "table1",
     "source_primary_keys": null,
     "staging_primary_keys": null,
     "staging_columns": ["col1", "col2", "col3"],

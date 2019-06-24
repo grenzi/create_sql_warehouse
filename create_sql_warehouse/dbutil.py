@@ -40,7 +40,7 @@ class DbUtil:
         )
         return ddl
 
-    def get_source_tables(self):
+    def get_source_table(self):
         sourcedb = self.settings.get("source_db")
         sourceserver = self.settings.get("source_server")
         sourceschema = self.settings.get("source_schema")
@@ -53,7 +53,7 @@ class DbUtil:
         result = source_engine.execute(sql)
         tablelist = list([x[0] for x in result.fetchall()])
 
-        return self.settings.get("source_tables", tablelist=tablelist)
+        return self.settings.get("source_table", tablelist=tablelist)
 
     def get_staging_ddl(self, table):
         sourcedb = self.settings.get("source_db")

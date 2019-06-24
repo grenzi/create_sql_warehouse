@@ -123,12 +123,11 @@ class Settings:
 
         return values
 
-    def _get_source_tables(self, tablelist):
+    def _get_source_table(self, tablelist):
         layout = [
             [
                 sg.Listbox(
                     values=tablelist,
-                    select_mode=sg.LISTBOX_SELECT_MODE_MULTIPLE,
                     size=(40, min(len(tablelist), 40)),
                 )
             ],
