@@ -231,7 +231,7 @@ class DbUtil:
         dim_table_ddl = self._get_table_ddl(dim_table, target_engine)
 
         scd1_sql = "--Type 1 SCD\n" + table_creation_template.render(
-            dropfirst=self.settings["dropfirst"],
+            dropfirst=self.settings.get("dropfirst"),
             table=table,
             schema=self.settings.get("dimension_schema"),
             create=dim_table_ddl,
@@ -240,7 +240,7 @@ class DbUtil:
         proc_name = f'BuildDim{table.replace(" ", "")}'
 
         sc1_proc_sql = scd1_load_template.render(
-            dropfirst=self.settings["dropfirst"],
+            dropfirst=self.settings.get("dropfirst"),
             procedurename=proc_name,
             dimension_schema=self.settings.get("dimension_schema"),
             dimension_table=table,
