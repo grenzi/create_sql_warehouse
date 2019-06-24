@@ -142,6 +142,19 @@ BEGIN
 
     if @old_ansi_null = 1 
     SET ANSI_NULLS ON
+
+    {% if backdate_hist_to %}   
+    --this will only be run on the first load, since after that min(validfrom) will equal backfill date
+    declare @oldest datetime2(7) = (SELECT MIN([ValidFrom]) FROM [{{temporal_schema}}].[{{source_table}}])
+    IF @oldest <> '{{backdate_hist_to}}'
+    BEGIN
+        ALTER TABLE [{{temporal_schema}}].[{{source_table}}] SET (system_versioning = off);
+        ALTER TABLE [{{temporal_schema}}].[{{source_table}}] DROP PERIOD FOR SYSTEM_TIME;
+        UPDATE [{{temporal_schema}}].[{{source_table}}] SET ValidFrom={{backdate_hist_to}};
+        ALTER TABLE [{{temporal_schema}}].[{{source_table}}] ADD PERIOD FOR SYSTEM_TIME (ValidFrom,ValidTo);
+        ALTER TABLE [{{temporal_schema}}].[{{source_table}}] set (system_versioning = on (HISTORY_TABLE=[{{temporal_schema}}].[{{source_table}}History]);        
+    END
+    {% endif %}
 END
 GO;
 """
