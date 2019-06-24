@@ -113,7 +113,9 @@ IF EXISTS (
         and SPECIFIC_NAME = '{{procedurename}}' 
         AND SPECIFIC_SCHEMA = '{{temporal_schema}}')
     DROP PROCEDURE [{{temporal_schema}}].[{{procedurename}}];
-GO;
+
+GO
+
 {% endif %}
 CREATE PROCEDURE [{{temporal_schema}}].[{{procedurename}}] AS
 BEGIN
@@ -155,8 +157,9 @@ BEGIN
         ALTER TABLE [{{temporal_schema}}].[{{source_table}}] set (system_versioning = on (HISTORY_TABLE=[{{temporal_schema}}].[{{source_table}}History]));        
     END
     {% endif %}
-END
-GO;
+END;
+
+GO
 """
 )
 
@@ -187,7 +190,8 @@ BEGIN
     FOR SYSTEM_TIME AS OF @d
     SET NOCOUNT OFF;
 END;
-GO;
+
+GO
 """
 )
 
@@ -219,6 +223,7 @@ BEGIN
     
     SET NOCOUNT OFF;
 END
-GO;
+
+GO
 """
 )
