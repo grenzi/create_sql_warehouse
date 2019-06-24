@@ -1,0 +1,14 @@
+{
+    "dimension_id_column_name": "dimId",
+    "dimension_schema": "dim",
+    "dropfirst": false,
+    "outputdir": "e:\\code\\create_sql_warehouse\\output\\",
+    "source_db": "dddmdb2_dev",
+    "source_schema": "sf",
+    "source_server": "localhost",
+    "staging_schema": "staging",
+    "target_db": "dddmdb2_dw",
+    "target_server": "localhost",
+    "temporal_schema": "hist",
+    "backdate_hist_to": "2019-01-01"
+}

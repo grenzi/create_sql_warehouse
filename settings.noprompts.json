@@ -9,5 +9,13 @@
     "staging_schema": "staging",
     "target_db": "<<targetdb>>",
     "target_server": "localhost",
-    "temporal_schema": "hist"
+    "temporal_schema": "hist",
+    "backdate_hist_to": "2019-01-01",
+    "source_tables": [ "table1","table2" ],
+    "source_primary_keys": null,
+    "staging_primary_keys": null,
+    "staging_columns": ["col1", "col2", "col3"],
+    "temporal_primary_keys": null,
+    "scd_type":"Type 2",
+    "scd_columns":["col1", "col2", "col3"]
 }
