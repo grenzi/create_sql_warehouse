@@ -67,7 +67,7 @@ class DbUtil:
         self.source_table = Table(
             table,
             meta,
-            schema=self.settings.get("source_schema"),
+            schema=sourceschema,
             autoload=True,
             autoload_with=source_engine,
         )

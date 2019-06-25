@@ -38,7 +38,7 @@ def ensure_dir_exists(path):
 @click.option(
     "--config",
     type=click.Path(exists=True),
-    default=None,
+    default='e:\\BusinessEnablement\\scripts\\util\\create_sql_warehouse\\settings.json',
     help="JSON file to read parameters from",
 )
 def main(config):
@@ -153,7 +153,7 @@ def main(config):
         settings.get("outputdir"),
         settings.get("dimension_schema"),
         "Stored Procedures",
-        f'Populate{table.replace(" ", "")}',
+        f'BuildDim{table.replace(" ", "")}',
         dimensionloadsql,
     )
 

@@ -137,7 +137,7 @@ class Settings:
         window = sg.Window("Select Input Tables", layout)
         event, values = window.Read()
         window.Close()
-        return values[0]
+        return values[0][0]
 
     def _get_primary_keys(self, columns):
         tablelist = list([x.name for x in columns])
