@@ -38,7 +38,7 @@ def ensure_dir_exists(path):
 @click.option(
     "--config",
     type=click.Path(exists=True),
-    default='e:\\BusinessEnablement\\scripts\\util\\create_sql_warehouse\\settings.json',
+    default="settings.json",
     help="JSON file to read parameters from",
 )
 def main(config):

@@ -65,11 +65,7 @@ class DbUtil:
         meta = MetaData()
 
         self.source_table = Table(
-            table,
-            meta,
-            schema=sourceschema,
-            autoload=True,
-            autoload_with=source_engine,
+            table, meta, schema=sourceschema, autoload=True, autoload_with=source_engine
         )
         self.source_table.schema = self.settings.get("staging_schema")
 
@@ -137,10 +133,9 @@ class DbUtil:
 
         keys = [x.name for x in self.staging_table.columns if x.primary_key]
         if len(keys) == 0:
-            logger.error(
-                "No keys defined in staging table. this should not ever happen"
+            keys = self.settings.get(
+                "staging_primary_keys", columns=self.staging_table.columns
             )
-            exit(-1)
 
         temporal_columns = [
             Column(

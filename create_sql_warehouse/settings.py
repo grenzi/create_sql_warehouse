@@ -125,12 +125,7 @@ class Settings:
 
     def _get_source_table(self, tablelist):
         layout = [
-            [
-                sg.Listbox(
-                    values=tablelist,
-                    size=(40, min(len(tablelist), 40)),
-                )
-            ],
+            [sg.Listbox(values=tablelist, size=(40, min(len(tablelist), 40)))],
             [sg.OK()],
         ]
 
@@ -157,10 +152,10 @@ class Settings:
         return values[0]
 
     def _get_source_primary_keys(self, columns):
-        return self._get_primary_keys(self, columns)
+        return self._get_primary_keys(columns)
 
     def _get_staging_primary_keys(self, columns):
-        return self._get_primary_keys(self, columns=columns)
+        return self._get_primary_keys(columns=columns)
 
     def _get_staging_columns(self, columns):
         # select source tables
